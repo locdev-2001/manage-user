@@ -1,6 +1,7 @@
 import "./App.css";
 import React, { useState } from "react";
 import UserForm from "./components/UserForm";
+import "antd/dist/reset.css";
 import UserItem from "./components/UserItem";
 const staticUser = [
   { id: "e1", name: "Tom", age: 20 },
@@ -8,19 +9,31 @@ const staticUser = [
   { id: "e3", name: "Jane", age: 19 },
 ];
 function App() {
-  const [user, setUser] = useState(staticUser);
+  const [users, setUsers] = useState(staticUser);
 
   const addUserHandler = (newUser) => {
-    setUser((prevUser) => {
+    setUsers((prevUser) => {
       return [...prevUser,newUser];
     });
   };
+  const deleteUserHandler = (userId) => {
+    const newUsers = users.filter(user => user.id !== userId);
+    setUsers(newUsers);
+  }
+  const updateUsers = (newUsers) => {
+    setUsers(newUsers)
+  }
+
   return (
     <>
       <div className="pt-6 h-1/3 flex justify-center m-auto">
         <UserForm addUserHandler={addUserHandler} />
       </div>
-      <UserItem items={user} />
+      <UserItem
+        updateUsers={updateUsers}
+        items={users}
+        onDelete={deleteUserHandler}
+      />
     </>
   );
 }
