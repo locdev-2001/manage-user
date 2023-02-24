@@ -27,9 +27,9 @@ const UserForm = (props) => {
   const submitHandler = (event) => {
     // check if user null return popup
     event.preventDefault();
-    const enteredName = nameInputRef.current.value;
-    const enteredAge = ageInputRef.current.value;
-    if (user && age && age >= 1) {
+    // const enteredName = nameInputRef.current.value;
+    // const enteredAge = ageInputRef.current.value;
+    if (user && age && age >=1) {
       const newUser = {
         id: Math.random().toString(36).substring(2, 7),
         name: user,
@@ -40,16 +40,12 @@ const UserForm = (props) => {
       setAge("");
       setIsFormOpen(false);
       //bugggggggggggggggggggggggggggggggggg
-    } else if (age < 1) {
+    }
+    else {
       showModal();
-      console.log('unuho',age)
-      setNotification(`Age can't be small than 1`)
-    } else {
-      showModal();
-      setNotification(`Please fill all fields`)
+      setNotification(`Please fill all fields or check age can't small than 1`);
       return;
     }
-    console.log(notification);
     //buggggggggggggggggggggggggg
   };
   const showForm = () => {
